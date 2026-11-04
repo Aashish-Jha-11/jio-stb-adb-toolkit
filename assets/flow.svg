@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="380" viewBox="0 0 1200 380" role="img" aria-label="How it works">
+  <defs>
+    <linearGradient id="bg2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b1220"/><stop offset="1" stop-color="#111a2e"/>
+    </linearGradient>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="9" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#f5792b"/>
+    </marker>
+  </defs>
+  <rect width="1200" height="380" rx="18" fill="url(#bg2)"/>
+  <text x="40" y="52" font-family="Segoe UI, Arial, sans-serif" font-size="26" font-weight="700" fill="#ffffff">How it works — all on your own wifi</text>
+  <text x="40" y="84" font-family="Segoe UI, Arial, sans-serif" font-size="17" fill="#9fb3c8">Nothing touches Jio's servers. Your PC answers the box's own check, locally.</text>
+
+  <!-- PC box -->
+  <rect x="60" y="130" width="380" height="150" rx="14" fill="#16233c" stroke="#2a3b5c"/>
+  <text x="84" y="168" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="700" fill="#ffffff">Your PC</text>
+  <text x="84" y="202" font-family="Segoe UI, Arial, sans-serif" font-size="16" fill="#c7d4e4">· local DNS (points jio.com &#8594; your PC)</text>
+  <text x="84" y="228" font-family="Segoe UI, Arial, sans-serif" font-size="16" fill="#c7d4e4">· local provisioning server (Docker)</text>
+  <text x="84" y="254" font-family="Segoe UI, Arial, sans-serif" font-size="16" fill="#c7d4e4">· adb (connect, block-ads, sideload)</text>
+
+  <!-- STB box -->
+  <rect x="760" y="130" width="380" height="150" rx="14" fill="#16233c" stroke="#2a3b5c"/>
+  <text x="784" y="168" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="700" fill="#ffffff">Jio STB</text>
+  <text x="784" y="202" font-family="Segoe UI, Arial, sans-serif" font-size="16" fill="#c7d4e4">· DNS set to your PC</text>
+  <text x="784" y="228" font-family="Segoe UI, Arial, sans-serif" font-size="16" fill="#c7d4e4">· ADB enabled after stage 1</text>
+  <text x="784" y="254" font-family="Segoe UI, Arial, sans-serif" font-size="16" fill="#c7d4e4">· ads blocked, apps sideloaded</text>
+
+  <!-- arrows -->
+  <line x1="440" y1="180" x2="758" y2="180" stroke="#f5792b" stroke-width="3" marker-end="url(#arrow)"/>
+  <text x="470" y="170" font-family="Segoe UI, Arial, sans-serif" font-size="15" fill="#ffb37a">1 · at boot, box's provisioning check answered locally &#8594; ADB on</text>
+  <line x1="758" y1="236" x2="440" y2="236" stroke="#f5792b" stroke-width="3" marker-end="url(#arrow)"/>
+  <text x="470" y="258" font-family="Segoe UI, Arial, sans-serif" font-size="15" fill="#ffb37a">2 · adb connect &#8594; block ads / sideload (no root)</text>
+
+  <text x="40" y="340" font-family="Segoe UI, Arial, sans-serif" font-size="15" fill="#7f8ea3">Internet is disconnected during setup &#183; right-to-repair on hardware you own &#183; not affiliated with Reliance Jio</text>
+</svg>
