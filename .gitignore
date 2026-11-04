@@ -1,0 +1,58 @@
+# --- Secrets & device-specific material (NEVER commit) ---
+# Private keys, certificates, and anything that could identify your box
+*.key
+*.pem
+*.p12
+*.pfx
+*.crt
+*.cer
+certs/
+tls/secrets/
+*serial*.txt
+*mac*.txt
+device-info-private*
+
+# Pulled firmware / partition dumps / boot images (large + possibly copyrighted)
+*.img
+*.bin
+*.zip
+*.dump
+boot/
+dumps/
+pulled/
+firmware/
+
+# ADB keys
+adbkey
+adbkey.pub
+
+# --- Tooling ---
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+*.egg-info/
+
+# Node (if a GUI/web helper is added later)
+node_modules/
+dist/
+build/
+
+# Docker
+*.local.yml
+
+# --- OS / editor ---
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/
+*.swp
+*~
+
+# Logs & scratch
+*.log
+scratch/
+tmp/
