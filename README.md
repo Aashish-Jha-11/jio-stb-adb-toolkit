@@ -38,17 +38,21 @@ A lot of Jio STB knowledge is scattered across forum posts and a couple of model
 | **JMSC200Av2** | ✅ public method | ✅ | ✅ (firmware patch level **before Jun 2024**) | Best supported |
 | **JMSB200A** | ✅ public method | ✅ | ⚠️ unverified | Supported |
 | **JHSC200 v1** | ✅ public method | ✅ | ❌ | Sideload only |
-| **JMSD200Av2** (AirFiber) | ❌ **no public method yet** | ❌ | ❌ secure boot | 🔬 [Research / WIP](docs/airfiber-jmsd200.md) |
+| **JMSD200Av2** (AirFiber) | ⚠️ **reported working** (stage 1) | ⚠️ follows from ADB | ⚠️ untested (secure boot) | 🔬 [Research / WIP](docs/airfiber-jmsd200.md) |
 
 > The matrix is **community-sourced** — if you have first-hand results, please [correct it via PR](CONTRIBUTING.md). Honesty is the whole point of this repo.
 
 ## Screenshots
 
-> Got your box modded? A couple of screenshots here make this far more convincing — PRs welcome (drop PNGs in `assets/` and link them).
+_Screenshots of a real modded box are the most convincing thing you can add._ Capture these on your box and drop the PNGs into `assets/` (named as below) — they'll render here automatically:
 
-| Before (stock + ads) | After (clean launcher, no ads) |
-|---|---|
-| _add screenshot_ | _add screenshot_ |
+1. **Before** — stock launcher with ads, or the boot ad.
+2. **After** — clean launcher, no ads.
+3. **Proof** — your PC terminal showing `adb devices` listing the box.
+
+| Before (stock + ads) | After (no ads) | `adb devices` proof |
+|---|---|---|
+| `assets/before.png` | `assets/after.png` | `assets/adb.png` |
 
 ## Quick start
 
@@ -60,6 +64,56 @@ A lot of Jio STB knowledge is scattered across forum posts and a couple of model
    - 🔴 **[Unlock the bootloader](docs/unlock-bootloader.md)** — advanced, brick-risk, specific models only.
    - 🔬 **[AirFiber JMSD200 status](docs/airfiber-jmsd200.md)** — if you have the newer box, start here. Read it before you waste hours.
 4. Stuck? See **[Troubleshooting](docs/troubleshooting.md)**.
+
+## Full walkthrough — get to an ad-free box
+
+> Everything from **step 3 onward needs no root** and is identical on every model. Getting ADB (step 2) is the only hands-on part: for **JMSC/JMSB/JHS** use the [safe path](docs/sideload-network-adb.md); for the **AirFiber D200** use the `Housekeeping-PoC` stage-1 tool (see [D200 status](docs/airfiber-jmsd200.md)).
+
+### 0 · Install the tools (on your PC)
+- **adb** (Android platform-tools), **Docker Desktop**, **Python 3**, **git**
+- Clone with submodules, then check your environment:
+```bash
+git clone --recursive https://github.com/Aashish-Jha-11/jio-stb-adb-toolkit
+cd jio-stb-adb-toolkit
+./scripts/setup.sh
+```
+
+### 1 · Identify your box
+Read the sticker under the box, or once ADB is up:
+```bash
+adb shell getprop ro.product.model
+adb shell getprop ro.build.version.security_patch
+```
+Then find it in the [compatibility matrix](docs/compatibility.md).
+
+### 2 · Enable ADB  ⚠️ (the one hands-on, slightly risky step)
+This is the upstream part. Follow **[docs/sideload-network-adb.md](docs/sideload-network-adb.md)** (D200: the `Housekeeping-PoC` submodule). In short: point the box's DNS at your PC through the hidden Settings menu, run the upstream stage-1 tool, disconnect the internet, and **cold power-cycle** the box. Don't borrow steps from a model that isn't yours.
+
+### 3 · Connect ADB (on your PC)
+```bash
+adb connect <box-ip>:5555
+adb devices          # the box should list as "device"
+```
+
+### 4 · Block ads — no root
+```bash
+# 1) system-wide ad-blocking DNS
+./scripts/block-ads.sh --ip <box-ip> --dns
+
+# 2) find then disable the boot-ad / launcher package (reversible)
+./scripts/block-ads.sh --list
+./scripts/block-ads.sh --disable <package.name>
+```
+Manual commands and the "which package?" trick: **[docs/block-ads.md](docs/block-ads.md)**.
+
+### 5 · Sideload apps (optional)
+```bash
+./scripts/sideload.sh --ip <box-ip> install yourapp.apk
+./scripts/sideload.sh launcher        # install the bundled clean launcher
+```
+
+### 6 · Make it stick
+Stage 1 blocks forced updates so Jio can't quietly re-enable ads or close ADB. If ads come back after an update, see **[troubleshooting](docs/troubleshooting.md)**.
 
 ## What's in the repo
 
@@ -88,6 +142,8 @@ git submodule update --init --recursive
 ```
 
 ## How it works (the short version)
+
+<p align="center"><img src="assets/flow.svg" alt="How it works — all on your own wifi" width="100%"></p>
 
 The safe "network ADB" path doesn't attack anything — it points your box's **DNS at a small server running on your own PC** on your own LAN, so the box's own provisioning check is answered locally and lets you flip on wireless debugging. From there it's standard Android: `adb connect`, `adb install app.apk`. The deep "unlock" path additionally uses a **public, already-patched Android vulnerability** to reach the bootloader lock state on specific older firmware. Full details, with credit to the people who did the hard research, are in [CREDITS](CREDITS.md).
 
