@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="320" viewBox="0 0 1280 320" role="img" aria-label="Jio STB ADB Toolkit">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b1220"/>
+      <stop offset="1" stop-color="#111a2e"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#f5792b"/>
+      <stop offset="1" stop-color="#ffb347"/>
+    </linearGradient>
+  </defs>
+  <rect width="1280" height="320" rx="20" fill="url(#bg)"/>
+  <rect x="0" y="0" width="12" height="320" fill="url(#accent)"/>
+  <text x="64" y="138" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="62" font-weight="700" fill="#ffffff">Jio STB ADB Toolkit</text>
+  <text x="66" y="188" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="25" fill="#9fb3c8">Enable ADB &#183; Sideload apps &#183; Block boot + in-app ads &#8212; the honest, all-models hub</text>
+  <g font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="20" fill="#dbe6f0">
+    <rect x="64" y="228" width="190" height="44" rx="22" fill="#1b2740"/>
+    <text x="86" y="256">No root needed</text>
+    <rect x="270" y="228" width="266" height="44" rx="22" fill="#1b2740"/>
+    <text x="292" y="256">AirFiber D200 research</text>
+    <rect x="552" y="228" width="300" height="44" rx="22" fill="#1b2740"/>
+    <text x="574" y="256">Community-sourced matrix</text>
+  </g>
+</svg>
