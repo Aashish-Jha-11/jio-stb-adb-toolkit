@@ -1,0 +1,6 @@
+[submodule "third_party/sideload-jiostb"]
+	path = third_party/sideload-jiostb
+	url = https://github.com/ilikechocopies/sideload-jiostb
+[submodule "third_party/Housekeeping-PoC"]
+	path = third_party/Housekeeping-PoC
+	url = https://github.com/JFC-Group/Housekeeping-PoC
