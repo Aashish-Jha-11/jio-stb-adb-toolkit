@@ -1,0 +1,26 @@
+name: Bug report
+description: Something in the toolkit's scripts or docs is wrong or broken.
+labels: ["bug"]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What you expected
+  - type: textarea
+    id: repro
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. ran ./scripts/...
+        2. ...
+  - type: input
+    id: env
+    attributes:
+      label: OS + tool versions
+      placeholder: "macOS 14 / adb 35.0.2 / docker 27"

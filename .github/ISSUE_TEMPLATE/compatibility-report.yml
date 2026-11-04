@@ -1,0 +1,65 @@
+name: Device compatibility report
+description: Share what works (or doesn't) on your Jio STB — the single most useful contribution here.
+title: "[compat] <model> <firmware> — worked / didn't"
+labels: ["compatibility"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for adding a data point! Even a **"didn't work"** saves the next person time.
+        Once you have ADB, grab these:
+        ```
+        adb shell getprop ro.product.model
+        adb shell getprop ro.build.display.id
+        adb shell getprop ro.build.version.security_patch
+        ```
+  - type: dropdown
+    id: model
+    attributes:
+      label: Model
+      options:
+        - JMSD200Av2 (AirFiber)
+        - JMSC200Av2
+        - JMSB200A
+        - JHSC200 v1
+        - Other (note below)
+    validations:
+      required: true
+  - type: input
+    id: firmware
+    attributes:
+      label: Firmware build (ro.build.display.id)
+      placeholder: "e.g. 25.1.9"
+    validations:
+      required: true
+  - type: input
+    id: patch
+    attributes:
+      label: Security patch (ro.build.version.security_patch)
+      placeholder: "e.g. 2024-02-05"
+  - type: checkboxes
+    id: tried
+    attributes:
+      label: What you tried
+      options:
+        - label: Stage 1 — enable network ADB
+        - label: Sideload apps (adb install)
+        - label: Ad-blocking via Private DNS
+        - label: Disable boot-ad package
+        - label: Bootloader unlock (upstream Housekeeping-PoC)
+  - type: dropdown
+    id: result
+    attributes:
+      label: Result
+      options:
+        - Worked fully
+        - Worked partially
+        - Did not work
+        - Bricked / broke something
+    validations:
+      required: true
+  - type: textarea
+    id: details
+    attributes:
+      label: Details / logs
+      description: Commands run, output, screenshots. **Redact serial number and MAC.**
